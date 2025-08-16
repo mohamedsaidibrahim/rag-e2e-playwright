@@ -2,6 +2,7 @@ export const selectors = {
   uploadInput: 'input[type="file"]',
   rowSelector: "span.text-sm.truncate",
   deleteButton: 'button[aria-label="Delete file"]',
+  fileStatus: "div.inline-flex.items-center.rounded-md",
   processFileButton: 'button[aria-label="Process file"]',
   uploadProgress: '[data-testid="upload-progress"], progress, .upload-progress',
   uploadItemRow: '[data-testid="upload-item"], .uploaded-file, .file-row',
