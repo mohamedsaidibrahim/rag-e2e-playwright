@@ -1,6 +1,5 @@
 export const selectors = {
   uploadInput: 'input[type="file"]',
-  uploadedFileRow: "div.flex.items-center.justify-between",
   rowSelector: "span.text-sm.truncate",
   deleteButton: 'button[aria-label="Delete file"]',
   processFileButton: 'button[aria-label="Process file"]',
