@@ -3,6 +3,7 @@ import { selectors } from "../utils/selectors";
 
 export async function waitForUploadToComplete(page: Page, fileName: string) {
   // Wait for either row to contain 'complete' text or progress bar to be gone.
+  console.log(`Waiting for upload to complete for file: ${fileName}`);
   const row = page.locator(`${selectors.rowSelector}:has-text("${fileName}")`);
   await expect(row).toBeVisible({ timeout: 30000 });
 }
