@@ -1,0 +1,38 @@
+name: E2E Tests
+on:
+  push:
+  pull_request:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Assumes the AUT is reachable at http://127.0.0.1:8000 in the runner env.
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run tests
+        env:
+          BASE_URL: ${{ env.BASE_URL || 'http://127.0.0.1:8000' }}
+          UPLOAD_STATUS_PATH:  documents/upload
+          CI: true
+        run: npm run test:all
+
+      - name: Generate Allure report
+        run: npm run allure:generate
+
+      - name: Upload Allure report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report

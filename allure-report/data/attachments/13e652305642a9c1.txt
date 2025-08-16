@@ -1,0 +1,42 @@
+# Page snapshot
+
+```yaml
+- heading "File Uploader and Question Answering System" [level=3]
+- button "Choose File"
+- button [disabled]:
+  - img
+- img
+- text: Credentials MT5.txt Unprocessed
+- button "Process file":
+  - img
+- button "Delete file":
+  - img
+- img
+- text: sample1.txt Unprocessed
+- button "Process file":
+  - img
+- button "Delete file":
+  - img
+- img
+- text: sample1.txt Unprocessed
+- button "Process file":
+  - img
+- button "Delete file":
+  - img
+- img
+- text: sample1.txt Unprocessed
+- button "Process file":
+  - img
+- button "Delete file":
+  - img
+- img
+- text: sample1.txt Unprocessed
+- button "Process file":
+  - img
+- button "Delete file":
+  - img
+- textbox "Ask a question about the uploaded documents..."
+- button "Ask Question" [disabled]:
+  - img
+  - text: Ask Question
+```
