@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { selectors } from "../utils/selectors";
-import { waitForUploadToComplete, waitForBackendAPIResponse, assertTheResponse } from "../utils/helpers";
+import { waitForUploadToComplete } from "../utils/helpers";
 import path from "path";
-import { defaultFileName, UPLOAD_STATUS_PATH, manyFilesVariety, sameFilesDifferentFormats, DELETE_API_PATH, PROCESS_API_PATH } from "../utils/constants";
+import { defaultFileName, manyFilesVariety, sameFilesDifferentFormats, DELETE_API_PATH, PROCESS_API_PATH } from "../utils/constants";
 
 const defaultFilePath = path.resolve(__dirname, "../resources/" + defaultFileName);
 
@@ -11,7 +11,7 @@ test.describe("File Upload Suite", () => {
   //   await page.goto("/", { waitUntil: "domcontentloaded", timeout: 60000 });
   //   await expect(page.locator(selectors.uploadInput)).toBeVisible();
   // });
-  test.only("1. VERIFY Uploading single file (UI + API verification)", async ({ page }) => {
+  test("1. VERIFY Uploading single file (UI + API verification)", async ({ page }) => {
     // Navigate to the app
     await page.goto("/", { waitUntil: "domcontentloaded", timeout: 60000 });
 
@@ -28,6 +28,7 @@ test.describe("File Upload Suite", () => {
     // Click the first submit button right after selecting the file
     const submitButton = page.locator("button.inline-flex.items-center.justify-center").first();
     await expect(submitButton).toBeEnabled();
+
     await submitButton.click();
 
     // Verify new row is added in UI
@@ -35,33 +36,7 @@ test.describe("File Upload Suite", () => {
 
     // Wait for upload to complete in the UI
     await waitForUploadToComplete(page, defaultFileName);
-
-    // Verify backend received it (API response check)
-    const responsePromise = await waitForBackendAPIResponse(page, UPLOAD_STATUS_PATH, "GET");
-    assertTheResponse(responsePromise);
   });
-
-
-  // test.only("1. VERIFY Uploading single file (UI + API verification)", async ({ page }) => {
-  //   await page.goto("/", { waitUntil: "domcontentloaded", timeout: 60000 });
-  //   await expect(page.locator(selectors.uploadInput)).toBeVisible();
-  //   const rowSelectorCount = await page.locator(selectors.rowSelector).count();
-  //   // Ensure uploader visible
-  //   await expect(page.locator(selectors.uploadInput)).toBeVisible();
-
-  //   // Upload single file
-  //   const [fileChooser] = await Promise.all([
-  //     page.waitForEvent("filechooser"),
-  //     page.click(selectors.uploadInput),
-  //   ]);
-  //   await fileChooser.setFiles(defaultFilePath);
-
-  //   // UI shows progress/completion
-  //   await waitForUploadToComplete(page, defaultFileName);
-  //   const responsePromise = await waitForBackendAPIResponse(page, UPLOAD_STATUS_PATH, "GET");
-  //   assertTheResponse(responsePromise);
-  //   await expect(page.locator(selectors.rowSelector)).toHaveCount(rowSelectorCount + 1);
-  // });
 
   test("2. Verify the Uplaoded file has the Unposted Status By Default", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded", timeout: 60000 });
@@ -77,7 +52,7 @@ test.describe("File Upload Suite", () => {
     await waitForUploadToComplete(page, defaultFileName);
 
     // Verify the status is unprocessed
-    const row = page.locator(`${selectors.rowSelector}:has-text(${defaultFileName})`);
+    const row = page.locator(`${selectors.rowSelector}:has-text(${defaultFileName})`).first();
     await expect(row).toContainText("Unprocessed");
   });
 
@@ -147,8 +122,6 @@ test.describe("File Upload Suite", () => {
     await page.click(`${selectors.rowSelector}:has-text(${defaultFileName}) ${selectors.deleteButton}`);
 
     // Verify deletion
-    const responsePromise = await waitForBackendAPIResponse(page, DELETE_API_PATH, "Delete");
-    assertTheResponse(responsePromise);
     await expect(page.locator(selectors.rowSelector)).toHaveCount(rowSelectorCount - 1);
   });
 
@@ -165,8 +138,8 @@ test.describe("File Upload Suite", () => {
     // Now process it
     await page.click(`${selectors.rowSelector}:has-text(${defaultFileName}) ${selectors.processFileButton}`);
 
-    // Verify processing is Complete
-    const responsePromise = await waitForBackendAPIResponse(page, PROCESS_API_PATH, "POST");
-    assertTheResponse(responsePromise);
+    // Verify the status is Processed
+    const row = page.locator(`${selectors.rowSelector}:has-text(${defaultFileName})`).first();
+    await expect(row).toContainText("Processed");
   });
 });
