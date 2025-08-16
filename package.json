@@ -10,6 +10,7 @@
   "license": "MIT",
   "author": "<Mohamed Said Ibrahin>",
   "scripts": {
+    "docker-compose":"docker-compose up -d --build",
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test tests/upload.spec.ts tests/chat.spec.ts",
