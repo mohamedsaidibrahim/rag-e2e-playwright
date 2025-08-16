@@ -9,14 +9,14 @@ test.describe("Error handling & UI responsiveness", () => {
     await navigateToTheHomeScreen(page);
   });
 
-  test("empty question should keep button disabled", async ({ page }) => {
+  test("1. Ensure that the empty question should keep button disabled", async ({ page }) => {
     const askBtn = page.locator(selectors.askButton);
     await expect(askBtn).toBeVisible();
     await expect(askBtn).toBeDisabled();
   });
 
 
-  test("unsupported file type shows error (if enforced)", async ({ page, browserName }) => {
+  test("2. Verify that unsupported file type shows error (if enforced)", async ({ page, browserName }) => {
     test.skip(browserName === "webkit", "skip edge case on webkit");
 
     const initialRowCount = await page.locator(selectors.rowSelector).count();
