@@ -1,0 +1,36 @@
+{
+  "name": "rag-e2e-playwright",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E2E test pipeline for RAG app (Playwright + Allure reporting + Docker).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohamedsaidibrahim/rag-e2e-playwright.git"
+  },
+  "license": "MIT",
+  "author": "<Mohamed Said Ibrahin>",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test tests/upload.spec.ts tests/chat.spec.ts",
+    "test:questions": "playwright test tests/rag-questions.spec.ts",
+    "test:all": "playwright test",
+    "report": "playwright show-report",
+    "allure:generate": "allure generate --clean allure-results -o allure-report",
+    "allure:open": "allure open allure-report",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .ts",
+    "postinstall": "npx playwright install --with-deps"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.54.2",
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "allure-commandline": "^2.29.0",
+    "allure-playwright": "^2.15.1",
+    "eslint": "^9.10.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
+  }
+}
