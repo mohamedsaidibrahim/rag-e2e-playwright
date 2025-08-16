@@ -11,7 +11,7 @@ test.describe("File Upload Suite", () => {
     await navigateToTheHomeScreen(page);
   });
 
-  test("1. VERIFY Uploading single file (UI + API verification)", async ({ page }) => {
+  test("1. VERIFY Uploading single file", async ({ page }) => {
     const rowSelectorCount = await page.locator(selectors.rowSelector).count();
     await inputFiles(page, [defaultFilePath]);
     await clickSubmitButton(page);

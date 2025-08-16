@@ -4,7 +4,7 @@ export const selectors = {
   deleteButton: 'button[aria-label="Delete file"]',
   fileStatus: "div.inline-flex.items-center.rounded-md",
   processFileButton: 'button[aria-label="Process file"]',
-  uploadProgress: '[data-testid="upload-progress"], progress, .upload-progress',
+  uploadProgressBar: 'progress, .upload-progress, .spinner',
   uploadItemRow: '[data-testid="upload-item"], .uploaded-file, .file-row',
   chatTextarea: 'textarea',
   askButton: 'button:has-text("Ask Question")',

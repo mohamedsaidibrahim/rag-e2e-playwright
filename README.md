@@ -1,4 +1,4 @@
-# RAG E2E Test Pipeline (Playwright  + Allure + Docker)
+# RAG E2E Test Pipeline (Playwright + Allure + Docker)
 
 This repository provides a production-grade end‑to‑end test suite and Dockerized pipeline for a RAG (Retrieval‑Augmented Generation) application running at **http://localhost:8000** by default.
 
@@ -76,7 +76,7 @@ Generated reports will be in `allure-report/` inside the project (mounted in com
 
 ## API & WebSocket Notes
 
-- Status polling endpoint defaults to  "/documents/upload" and can be overridden via env var `UPLOAD_STATUS_PATH`.
+- Status polling endpoint defaults to "/documents/upload" and can be overridden via env var `UPLOAD_STATUS_PATH`.
 - If your AUT exposes a different API, set `UPLOAD_STATUS_PATH` accordingly or rely solely on UI progress checks.
 - WebSocket capture relies on Playwright's `page.on("websocket")` and `framereceived` event.
 
@@ -99,17 +99,3 @@ A minimal GitHub Actions workflow is included in `.github/workflows/github.yml`.
 - **Endpoint Guessing:** Without fixed API contracts, status polling uses a configurable default or UI heuristics.
 - **Keyword‑based Relevance:** For strict semantic checks, integrate golden answers or embeddings‑based validators.
 - **Network‑mode Host:** On Linux, using `network_mode: host` simplifies connectivity but is less portable than explicit bridges.
-
-## Found Bugs (Template — fill as you test your AUT)
-
-Create entries like the following as you validate the running RAG app:
-
-### BUG-001: Upload progress never completes for large files
-
-**Steps:** Upload a >50MB document; observe progress.
-**Expected:** Progress reaches 100% and item marked as completed.
-**Actual:** Progress stalls at 95% for >2 minutes.
-**Workaround:** Refresh page retriggers status sync.
-
-
-

@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { expect, Page, request } from "@playwright/test";
 import { selectors } from "../utils/selectors";
 
@@ -29,13 +31,15 @@ export async function clickSubmitButton(page: Page) {
   await submitButton.click();
 }
 
-// export function waitForBackendAPIResponse(page: Page, API_PATH: string, method: string) {
-//   const responsePromise = page.waitForResponse(response =>
-//     response.url().includes(API_PATH) && response.request().method() === method
-//   );
-//   return responsePromise;
-// }
+export function generateLargeFile(fileName: string, sizeInMB: number): string {
+  const filePath = path.join(__dirname, "..", "tmp", fileName);
 
-// export function assertTheResponse(response: any) {
-//   expect(response.status).toBe(200);
-// }
+  // Ensure tmp directory exists
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+  // Create file with random data (sizeInMB MB)
+  const buffer = Buffer.alloc(sizeInMB * 1024 * 1024, "a");
+  fs.writeFileSync(filePath, buffer);
+
+  return filePath;
+}
