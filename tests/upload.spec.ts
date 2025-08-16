@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { selectors } from "../utils/selectors";
 import { waitForUploadToComplete, waitForBackendAPIResponse, assertTheResponse } from "../utils/helpers";
 import path from "path";
+import { defaultFileName, UPLOAD_STATUS_PATH, manyFilesVariety, sameFilesDifferentFormats, DELETE_API_PATH, PROCESS_API_PATH } from "../utils/constants";
 
 const defaultFilePath = path.resolve(__dirname, "../resources/" + defaultFileName);
 

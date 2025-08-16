@@ -4,6 +4,7 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:8000";
 
 export default defineConfig({
   testDir: "./tests",
+  fullyParallel: true,
   timeout: 180_000,
   expect: { timeout: 30_000 },
   reporter: [
@@ -25,6 +26,6 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     }
   ],
-  // Shard-ready in CI
   workers: process.env.CI ? 2 : undefined,
+  globalTeardown: "./global-teardown.js",
 });
