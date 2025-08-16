@@ -1,10 +1,10 @@
-# RAG E2E Test Pipeline (Playwright 1.54.2 + Allure + Docker)
+# RAG E2E Test Pipeline (Playwright  + Allure + Docker)
 
 This repository provides a production-grade end‑to‑end test suite and Dockerized pipeline for a RAG (Retrieval‑Augmented Generation) application running at **http://localhost:8000** by default.
 
 ## Features
 
-- Playwright **v1.54.2** (as requested), TypeScript.
+- Playwright (as requested), TypeScript.
 - File upload tests (single & multiple) using selector `input[type="file"]`.
 - UI progress + optional API polling to verify upload completion.
 - Chat readiness checks (textarea + disabled Ask button until input).
@@ -82,7 +82,7 @@ Generated reports will be in `allure-report/` inside the project (mounted in com
 
 ## CI/CD
 
-A minimal GitHub Actions workflow is included in `.github/workflows/ci.yml`.
+A minimal GitHub Actions workflow is included in `.github/workflows/github.yml`.
 
 - Assumes the AUT is reachable by the runner (e.g., started in a separate job/service). Set `BASE_URL` in workflow env or repository secrets.
 - Uploads the generated Allure report as a build artifact.
@@ -111,13 +111,5 @@ Create entries like the following as you validate the running RAG app:
 **Actual:** Progress stalls at 95% for >2 minutes.
 **Workaround:** Refresh page retriggers status sync.
 
-### BUG-002: "Ask Question" remains disabled after typing
-
-**Steps:** Open chat; type text into textarea.
-**Expected:** Button enables.
-**Actual:** Button remains disabled until unfocus/refocus textarea.
-**Workaround:** Blur & focus event missing; attach input listener.
-
-Add more as discovered.
 
 
