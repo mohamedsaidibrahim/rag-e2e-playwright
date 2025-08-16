@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   e2e:
+    image: rag_e2e_test_pipeline
     build:
       context: ..
       dockerfile: docker/Dockerfile
@@ -9,9 +10,15 @@ services:
       - UPLOAD_STATUS_PATH=${UPLOAD_STATUS_PATH:-/documents/upload}
       - CI=true
     volumes:
+      # Mount project
       - ..:/app
-    network_mode: "host"
-    # On Mac/Windows you can remove network_mode and rely on host.docker.internal
-    # ports: []  # Not exposing, this is a test runner
+
+      # Persist Allure artifacts
+      - ./allure-results:/app/allure-results
+      - ./allure-report:/app/allure-report
+
+    network_mode: "host" # Linux only
+    # On Mac/Windows, remove this and rely on host.docker.internal
+
     command: >
       sh -lc "npm run test:all && npm run allure:generate"
