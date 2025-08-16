@@ -6,7 +6,6 @@ test.describe("Chat UI readiness", () => {
   test.beforeEach(async ({ page }) => {
     await navigateToTheHomeScreen(page);
   });
-
   test("chat loads and ask button enables after typing", async ({ page }) => {
     // Navigate to chat if needed: try to find textarea
     const textarea = page.locator(selectors.chatTextarea);

@@ -3,7 +3,6 @@ import { selectors } from "../utils/selectors";
 import { navigateToTheHomeScreen, inputFiles, clickSubmitButton } from "../utils/helpers";
 import { unsupportedFileFormat } from "../utils/constants";
 
-
 test.describe("Error handling & UI responsiveness", () => {
   test.beforeEach(async ({ page }) => {
     await navigateToTheHomeScreen(page);
@@ -14,7 +13,6 @@ test.describe("Error handling & UI responsiveness", () => {
     await expect(askBtn).toBeVisible();
     await expect(askBtn).toBeDisabled();
   });
-
 
   test("2. Verify that unsupported file type shows error (if enforced)", async ({ page, browserName }) => {
     test.skip(browserName === "webkit", "skip edge case on webkit");

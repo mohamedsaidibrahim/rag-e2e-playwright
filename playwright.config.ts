@@ -4,8 +4,8 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:8000";
 
 export default defineConfig({
   testDir: "./tests",
-  timeout: 180_000,
-  expect: { timeout: 30_000 },
+  timeout: 180000,
+  expect: { timeout: 30000 },
   reporter: [
     ["list"],
     ["allure-playwright"],
@@ -16,8 +16,8 @@ export default defineConfig({
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
-    actionTimeout: 30_000,
-    navigationTimeout: 60_000,
+    actionTimeout: 30000,
+    navigationTimeout: 60000,
   },
   projects: [
     {
