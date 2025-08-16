@@ -1,0 +1,4 @@
+Secondary RAG Notes
+-------------------
+Use cases mentioned: question answering, summarization, and fact extraction.
+Edge cases: empty queries, unsupported file types, and concurrent uploads.

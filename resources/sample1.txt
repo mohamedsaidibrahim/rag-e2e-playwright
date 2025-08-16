@@ -1,0 +1,10 @@
+RAG Application Test Document
+=============================
+This is a lightweight document intended for automated testing of Retrieval-Augmented Generation (RAG) systems.
+It contains predictable phrases to assert against.
+
+Key points:
+- The purpose is to validate file upload, ingestion, and chat-based retrieval.
+- Components include: uploader, document indexer, retriever, and chat interface.
+- The document addresses the problem of verifying end-to-end behavior of a RAG pipeline.
+- Quote/Definition: "Retrieval-Augmented Generation (RAG) combines information retrieval with text generation to ground responses."
