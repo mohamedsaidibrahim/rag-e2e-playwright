@@ -25,8 +25,8 @@ test.describe("File Upload Suite", () => {
     // Wait for upload to complete in UI
     await waitForUploadToComplete(page, defaultFileName);
     // Verify the status is unprocessed
-    const row = page.locator(`${selectors.rowSelector}:has-text(${defaultFileName})`).last();
-    await expect(row).toContainText("Unprocessed");
+    const lastRowStatus = page.locator(`${selectors.fileStatus}`).last();
+    await expect(lastRowStatus).toContainText("Unprocessed");
   });
 
   test("3. VERIFY Uploading multiple files", async ({ page }) => {
@@ -63,14 +63,14 @@ test.describe("File Upload Suite", () => {
   });
 
   test("6. VERIFY Deleting uploaded file", async ({ page }) => {
-    const rowSelectorCount = await page.locator(selectors.rowSelector).count();
-    await inputFiles(page, [defaultFileName]);
+    const expectedSelectorCount = await page.locator(selectors.rowSelector).count();
+    await inputFiles(page, [defaultFilePath]);
     await clickSubmitButton(page);
     await waitForUploadToComplete(page, defaultFileName);
     // Now delete it
-    await page.locator(`${selectors.rowSelector}:has-text(${defaultFileName}) ${selectors.deleteButton}`).last().click();
+    await page.locator(`${selectors.deleteButton}`).first().click();
     // Verify deletion
-    await expect(page.locator(selectors.rowSelector)).toHaveCount(rowSelectorCount - 1);
+    await expect(page.locator(selectors.rowSelector)).toHaveCount(expectedSelectorCount);
   });
 
   test("7. VERIFY Processing uploaded file", async ({ page }) => {
@@ -80,7 +80,7 @@ test.describe("File Upload Suite", () => {
     // Now process it
     await page.locator(`${selectors.rowSelector}:has-text(${defaultFileName}) ${selectors.processFileButton}`).last().click();
     // Verify the status is Processed
-    const row = page.locator(`${selectors.rowSelector}:has-text(${defaultFileName})`).last();
-    await expect(row).toContainText("Processed");
+    const lastRowStatus = page.locator(`${selectors.fileStatus}`).last();
+    await expect(lastRowStatus).toContainText("Processed");
   });
 });
