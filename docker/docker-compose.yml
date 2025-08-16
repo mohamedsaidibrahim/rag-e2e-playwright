@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  e2e:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      - BASE_URL=${BASE_URL:-http://host.docker.internal:8000}
+      - UPLOAD_STATUS_PATH=${UPLOAD_STATUS_PATH:-/documents/upload}
+      - CI=true
+    volumes:
+      - ..:/app
+    network_mode: "host"
+    # On Mac/Windows you can remove network_mode and rely on host.docker.internal
+    # ports: []  # Not exposing, this is a test runner
+    command: >
+      sh -lc "npm run test:all && npm run allure:generate"
