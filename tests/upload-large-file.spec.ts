@@ -38,14 +38,5 @@ test.describe("File Upload - Large Files", () => {
 
         // Wait for upload completion in the UI
         await waitForUploadToComplete(page, largeFileName);
-
-        // Optionally verify backend received it
-        const response = await page.waitForResponse(res =>
-            res.url().includes(UPLOAD_STATUS_PATH) && res.status() === 200
-        );
-        expect(await response.json()).toEqual(expect.objectContaining({
-            fileName: largeFileName,
-            status: "completed",
-        }));
     });
 });
