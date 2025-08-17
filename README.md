@@ -169,9 +169,10 @@ The chatbot should process the request and display a visible response in the cha
   - `[data-testid="msg-bot"], .message.bot, .bubble.bot not found`.
 
   **Severity:**
-  Critical
+  - Critical
+  
   **Priority:**
-  1
+  - 1
 
 ---
 
@@ -196,9 +197,10 @@ Clicking the `Process file` button times out — no visible progress or confirma
 
 
   **Severity:**
-  High
+  - High
+  
   **Priority:**
-  1
+  - 1
 
 ---
 
@@ -224,9 +226,10 @@ locator.setInputFiles: Error: Non-multiple file input can only accept single fil
 ```
 
   **Severity:**
-  Medium
+  - Medium
+  
   **Priority:**
-  2
+  - 2
 
 ---
 
@@ -250,9 +253,10 @@ The system should accept supported file types. If these formats are unsupported 
 - Users cannot analyze these file types.
 
   **Severity:**
-  Medium
+  -  Medium
+  
   **Priority:**
-  3
+  - 3
 
 ---
 
@@ -261,8 +265,8 @@ The system should accept supported file types. If these formats are unsupported 
 
 ---
 
-👨‍💻 Maintained by **Mohamed Said Ibrahim** · Cypress Ambassador
 
 ```
+👨‍💻 Maintained by **Mohamed Said Ibrahim** · Cypress Ambassador
 
 ```
